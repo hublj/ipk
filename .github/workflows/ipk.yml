@@ -162,7 +162,3 @@ jobs:
             2. 下载下面对应的IPK文件， 软路由后台-系统-文件传输-选择本地文件-选择ipk上传-上传文件列表-安装
           注意：单独上传IPK可能会因为依赖问题无法正确使用，还是建议刷新固件。
         artifacts: ${{ env.FIRMWARE }}/*
-
-    - name: Telegram notification
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      run: curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=${{ env.FILE_NAME }}编译完成" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
